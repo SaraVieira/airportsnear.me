@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useCurrentPosition } from 'react-use-geolocation'
 import algoliasearch from 'algoliasearch'
+import Autocomplete from 'react-google-autocomplete'
 import styled from 'styled-components'
 import header from './assets/header.svg'
 import wikipedia from './assets/wikipedia.svg'
@@ -78,10 +79,12 @@ const index = client.initIndex('all_airports')
 const Main = () => {
   const [position] = useCurrentPosition()
   const [airports, setAirports] = useState([])
+  const [coords, setCoords] = useState(null)
 
   const getData = async () => {
+    const coordinates = coords || position.coords
     const { hits } = await index.search({
-      aroundLatLng: `${position.coords.latitude}, ${position.coords.longitude}`,
+      aroundLatLng: `${coordinates.latitude}, ${coordinates.longitude}`,
       getRankingInfo: true,
       hitsPerPage: 3,
       facetFilters: ['scheduled_service:yes']
@@ -91,14 +94,36 @@ const Main = () => {
   }
   useEffect(() => {
     if (position) getData().then(setAirports)
-  }, [position])
+  }, [position, coords])
 
   const closest = airports[0]
   const other = [airports[1], airports[2]]
   return (
     <App>
       <H1> Your closest airport</H1>
+      <Autocomplete
+        style={{
+          fontSize: '16px',
+          position: 'absolute',
+          margin: '46px 23px',
+          marginTop: '100px',
+          padding: '10px 13px',
+          background: 'transparent',
+          border: '0',
+          color: 'white',
+          borderBottom: '2px solid white',
+          paddingLeft: '0'
+        }}
+        placeholder="Set Your Location"
+        onPlaceSelected={place =>
+          setCoords({
+            latitude: place.geometry.location.lat(),
+            longitude: place.geometry.location.lng()
+          })
+        }
+      />
       <img src={header} width="100%" alt="Landscape of city" />
+
       <Section>
         {airports[0] ? (
           <>
@@ -157,7 +182,7 @@ const Main = () => {
               <Subtitle>Other close airports</Subtitle>
               <Section style={{ padding: 0 }}>
                 {other.map(a => (
-                  <Text>
+                  <Text key={a.id}>
                     <a
                       target="_blank"
                       rel="noopener noreferrer"
