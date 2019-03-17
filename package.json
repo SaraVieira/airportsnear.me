@@ -1,0 +1,43 @@
+{
+  "name": "new",
+  "version": "1.0.0",
+  "description": "",
+  "keywords": [],
+  "main": "src/index.js",
+  "dependencies": {
+    "algoliasearch": "3.32.1",
+    "google-images": "2.1.0",
+    "react": "16.8.3",
+    "react-country-flag": "^1.0.2",
+    "react-dom": "16.8.3",
+    "react-scripts": "2.0.3",
+    "react-use": "5.7.1",
+    "react-use-geolocation": "^0.0.0-alpha.1",
+    "reset.css": "2.0.2",
+    "styled-components": "4.1.3"
+  },
+  "devDependencies": {
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-node": "^8.0.1",
+    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-standard": "^4.0.0",
+    "prettier": "^1.16.4"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "pretest": "npm run lint",
+    "test": "react-scripts test --env=jsdom",
+    "posttest": "npm run format",
+    "eject": "react-scripts eject",
+    "format": "prettier --write '**/*.{js,css,md}'",
+    "lint": "eslint . --cache --fix"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}
