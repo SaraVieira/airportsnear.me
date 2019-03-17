@@ -71,7 +71,8 @@ const Main = () => {
     const { hits } = await index.search({
       aroundLatLng: `${position.coords.latitude}, ${position.coords.longitude}`,
       getRankingInfo: true,
-      hitsPerPage: 3
+      hitsPerPage: 3,
+      facetFilters: ['scheduled_service:yes']
     })
 
     return hits
