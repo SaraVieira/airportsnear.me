@@ -18,21 +18,18 @@ const AutocompleteStyles = {
 
 const TryComplete = ({ onSelect }) => {
   let component = null
-  import('react-google-autocomplete')
-    .then(({ Autocomplete }) => {
-      component = (
-        <Autocomplete
-          style={AutocompleteStyles}
-          placeholder="Set Your Location"
-          onPlaceSelected={onSelect}
-        />
-      )
-    })
-    .catch(err => {
-      component = null
-    })
+  import('react-google-autocomplete').then(({ default: Autocomplete }) => {
+    console.log(Autocomplete)
+    component = (
+      <Autocomplete
+        style={AutocompleteStyles}
+        placeholder="Set Your Location"
+        onPlaceSelected={onSelect}
+      />
+    )
+  })
 
-  return component
+  return <div />
 }
 
 export default ({ onSelect }) => {
