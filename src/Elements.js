@@ -46,6 +46,7 @@ export const Button = styled.button`
   border: none;
   text-align: left;
   padding: 0;
+  text-decoration: underline;
 `
 
 export const Section = styled.section`

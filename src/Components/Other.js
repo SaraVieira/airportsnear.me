@@ -7,7 +7,6 @@ export default ({ airports, onClick }) => {
       <Subtitle>Other close airports</Subtitle>
       <Section style={{ padding: 0 }}>
         {airports.map(a => {
-          const link = a.home_link || a.wikipedia_link
           const distance = (a._rankingInfo.geoDistance / 1000).toFixed(1)
           return (
             <Text key={a.id}>
