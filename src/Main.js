@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import header from './assets/header.svg'
 import wikipedia from './assets/wikipedia.svg'
 import google from './assets/google.svg'
+import link from './assets/link.svg'
 import ReactCountryFlag from 'react-country-flag'
 
 const App = styled.main`
@@ -57,6 +58,17 @@ const List = styled.div`
   a {
     margin-right: 5px;
   }
+`
+
+const Maps = styled.img`
+  margin-top: -7px;
+  display: block;
+`
+
+const Link = styled.img`
+  height: 13px;
+  margin-top: -5px;
+  display: block;
 `
 
 const client = algoliasearch('A8JDD1DDSB', '06c4bcc6e1b48e0fa133cc97f1180be4')
@@ -125,11 +137,18 @@ const Main = () => {
                   <a
                     target="_blank"
                     rel="noopener noreferrer"
+                    href={closest.home_link}
+                  >
+                    <Link width="16" src={link} alt="Website" />
+                  </a>
+                  <a
+                    target="_blank"
+                    rel="noopener noreferrer"
                     href={`https://www.google.com/maps/search/?api=1&query=${
                       closest._geoloc.lat
                     },${closest._geoloc.lng}`}
                   >
-                    <img width="13" src={google} alt="Google logo" />
+                    <Maps width="13" src={google} alt="Google logo" />
                   </a>
                 </List>
               </Text>
