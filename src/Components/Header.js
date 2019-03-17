@@ -16,14 +16,31 @@ const AutocompleteStyles = {
   paddingLeft: '0'
 }
 
+const TryComplete = ({ onSelect }) => {
+  let component = null
+  import('react-google-autocomplete')
+    .then(({ Autocomplete }) => {
+      component = (
+        <Autocomplete
+          style={AutocompleteStyles}
+          placeholder="Set Your Location"
+          onPlaceSelected={onSelect}
+        />
+      )
+    })
+    .catch(err => {
+      component = null
+    })
+
+  return component
+}
+
 export default ({ onSelect }) => {
   return (
     <>
       <H1> Your closest airport</H1>
-      <Autocomplete
-        style={AutocompleteStyles}
-        placeholder="Set Your Location"
-        onPlaceSelected={place =>
+      <TryComplete
+        onSelect={place =>
           onSelect({
             latitude: place.geometry.location.lat(),
             longitude: place.geometry.location.lng()
