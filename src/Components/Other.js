@@ -1,29 +1,26 @@
 import React from 'react'
-import { Subtitle, Section, Text } from '../Elements'
+import { Subtitle, Section, Text, Button } from '../Elements'
 
-export default ({ airports }) => {
+export default ({ airports, onClick }) => {
   return (
     <div style={{ gridColumn: '1 / 3' }}>
       <Subtitle>Other close airports</Subtitle>
       <Section style={{ padding: 0 }}>
         {airports.map(a => {
           const link = a.home_link || a.wikipedia_link
+          const distance = (a._rankingInfo.geoDistance / 1000).toFixed(1)
           return (
             <Text key={a.id}>
-              {link ? (
-                <a
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  href={a.home_link || a.wikipedia_link}
-                >
-                  {a.name} ({(a._rankingInfo.geoDistance / 1000).toFixed(1)}
-                  km){' '}
-                </a>
-              ) : (
-                <>
-                  {a.name} ({(a._rankingInfo.geoDistance / 1000).toFixed(1)}km){' '}
-                </>
-              )}
+              <Button
+                onClick={() =>
+                  onClick({
+                    latitude: a._geoloc.lat,
+                    longitude: a._geoloc.lng
+                  })
+                }
+              >
+                {a.name} ({distance}km){' '}
+              </Button>
             </Text>
           )
         })}

@@ -36,6 +36,18 @@ export const Text = styled.p`
     color: #545454;
   }
 `
+
+export const Button = styled.button`
+  font-size: 16px;
+  color: #545454;
+  line-height: 24px;
+  appearance: none;
+  background: transparent;
+  border: none;
+  text-align: left;
+  padding: 0;
+`
+
 export const Section = styled.section`
   padding: 20px;
   display: grid;

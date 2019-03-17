@@ -42,7 +42,7 @@ const Main = () => {
           <>
             <Airport airport={closest} />
             <Links airport={closest} />
-            <Other airports={other} />
+            <Other airports={other} onClick={setCoords} />
           </>
         ) : (
           <Subtitle>Getting your location</Subtitle>
