@@ -3,7 +3,7 @@ node_modules/
 .DS_Store
 Thumbs.db
 .idea/
-build
+build/
 .vscode/
 *.sublime-project
 *.sublime-workspace
