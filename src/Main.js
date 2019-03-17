@@ -64,7 +64,7 @@ const client = algoliasearch('A8JDD1DDSB', '06c4bcc6e1b48e0fa133cc97f1180be4')
 const index = client.initIndex('all_airports')
 
 const Main = () => {
-  const [position, error] = useCurrentPosition()
+  const [position] = useCurrentPosition()
   const [airports, setAirports] = useState([])
 
   const getData = async () => {
@@ -78,9 +78,7 @@ const Main = () => {
     return hits
   }
   useEffect(() => {
-    if (position) {
-      const data = getData().then(setAirports)
-    }
+    if (position) getData().then(setAirports)
   }, [position])
 
   const closest = airports[0]
@@ -88,7 +86,7 @@ const Main = () => {
   return (
     <App>
       <H1> Your closest airport</H1>
-      <img src={header} width="100%" />
+      <img src={header} width="100%" alt="Landscape of city" />
       <Section>
         {airports[0] ? (
           <>
@@ -117,16 +115,21 @@ const Main = () => {
               <Subtitle>Links</Subtitle>
               <Text>
                 <List>
-                  <a target="_blank" href={closest.wikipedia_link}>
-                    <img width="16" src={wikipedia} />
+                  <a
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    href={closest.wikipedia_link}
+                  >
+                    <img width="16" src={wikipedia} alt="Wikipedia logo " />
                   </a>
                   <a
                     target="_blank"
+                    rel="noopener noreferrer"
                     href={`https://www.google.com/maps/search/?api=1&query=${
                       closest._geoloc.lat
                     },${closest._geoloc.lng}`}
                   >
-                    <img width="13" src={google} />
+                    <img width="13" src={google} alt="Google logo" />
                   </a>
                 </List>
               </Text>
@@ -136,7 +139,11 @@ const Main = () => {
               <Section style={{ padding: 0 }}>
                 {other.map(a => (
                   <Text>
-                    <a target="_blank" href={a.home_link || a.wikipedia_link}>
+                    <a
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href={a.home_link || a.wikipedia_link}
+                    >
                       {a.name} ({(a._rankingInfo.geoDistance / 1000).toFixed(1)}
                       km){' '}
                     </a>
