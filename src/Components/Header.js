@@ -21,6 +21,8 @@ export default ({ onSelect }) => {
     <>
       <H1> Your closest airport</H1>
       <Autocomplete
+        // Component defaults to cities only and I want everything
+        types={null}
         style={AutocompleteStyles}
         placeholder="Set Your Location"
         onPlaceSelected={place =>

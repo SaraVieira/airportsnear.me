@@ -21,12 +21,9 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "pretest": "npm run lint",
-    "test": "react-scripts test --env=jsdom",
     "posttest": "npm run format",
     "eject": "react-scripts eject",
-    "format": "prettier --write '**/*.{js,css,md}'",
-    "lint": "eslint . --cache --fix"
+    "format": "prettier --write '**/*.{js,css,md}'"
   },
   "browserslist": [
     ">0.2%",
