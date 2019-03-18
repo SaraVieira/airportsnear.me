@@ -17,7 +17,7 @@ export default ({ airport }) => (
           <img width="24" src={wikipedia} alt="Wikipedia logo " />
         </a>
         <a target="_blank" rel="noopener noreferrer" href={airport.home_link}>
-          <Link width="24" src={link} alt="Website" />
+          <Link src={link} alt="Website" />
         </a>
         <a
           target="_blank"

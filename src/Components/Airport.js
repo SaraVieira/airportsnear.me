@@ -2,8 +2,14 @@ import React from 'react'
 import ReactCountryFlag from 'react-country-flag'
 import { Subtitle, Text } from '../Elements'
 
-export default ({ airport }) => (
+export default ({ airport, error }) => (
   <>
+    {error ? (
+      <Subtitle style={{ gridColumn: '1 / 3', color: '#d58e8e' }}>
+        Because there was an error getting your geolocation these results are by
+        IP and maybe off mainly if you are using mobile data
+      </Subtitle>
+    ) : null}
     <div>
       <Subtitle>Name</Subtitle>
       <Text>{airport.name}</Text>
@@ -15,7 +21,7 @@ export default ({ airport }) => (
     <div>
       <Subtitle>Location</Subtitle>
       <Text>
-        {airport.municipality} -{' '}
+        {airport.municipality && `${airport.municipality} - `}
         <ReactCountryFlag code={airport.iso_country} svg />
       </Text>
     </div>

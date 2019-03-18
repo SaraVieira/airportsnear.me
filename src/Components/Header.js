@@ -24,6 +24,7 @@ export default ({ onSelect }) => {
         style={AutocompleteStyles}
         placeholder="Set Your Location"
         onPlaceSelected={place =>
+          place.geometry &&
           onSelect({
             latitude: place.geometry.location.lat(),
             longitude: place.geometry.location.lng()

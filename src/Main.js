@@ -13,7 +13,7 @@ const client = algoliasearch('A8JDD1DDSB', '06c4bcc6e1b48e0fa133cc97f1180be4')
 const index = client.initIndex('all_airports')
 
 const Main = () => {
-  const [position] = useCurrentPosition()
+  const [position, error] = useCurrentPosition()
   const [airports, setAirports] = useState([])
   const [coords, setCoords] = useState(null)
 
@@ -28,9 +28,22 @@ const Main = () => {
 
     return hits
   }
+
+  const getDataPerIp = async () => {
+    const { hits } = await index.search({
+      aroundLatLngViaIP: true,
+      getRankingInfo: true,
+      hitsPerPage: 3,
+      facetFilters: ['scheduled_service:yes']
+    })
+
+    return hits
+  }
+
   useEffect(() => {
     if (position) getData().then(setAirports)
-  }, [position, coords])
+    if (error) getDataPerIp().then(setAirports)
+  }, [position, coords, error])
 
   const closest = airports[0]
   const other = [airports[1], airports[2]]
@@ -40,7 +53,7 @@ const Main = () => {
       <Section>
         {airports[0] ? (
           <>
-            <Airport airport={closest} />
+            <Airport airport={closest} error={error} />
             <Links airport={closest} />
             <Other airports={other} onClick={setCoords} />
           </>
